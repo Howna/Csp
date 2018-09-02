@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 /*
  * 直接把数放到数组里面，将数组初始化为0，然后遍历整个数组，arr[king]++使得每遇到一个相同的数的时候，
@@ -5,7 +6,7 @@ import java.util.Scanner;
  * 就可以找到出现次数最多的数了。
  */
 
-public class t1 {
+public class Csp_2013_1 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
