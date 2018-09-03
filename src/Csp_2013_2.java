@@ -17,26 +17,33 @@ import java.util.Scanner;
 	0-670-82162-0
 样例输出:
 	0-670-82162-4
+	
+基本思路：
+1.先用replace把“-”去掉，只剩下数字，然后对数字作运算处理即可。
+2.用CharAt(i)-48将字符型转换成整形。这个知识点是这样的：之所以charAt(i)-48这里减去48是因为“/0"这个字符的ASCII码正好是48，
+减去它就可以将char转换为对应的整形。
  */
 public class Csp_2013_2 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		String s = sc.nextLine();
-		//String sk = "-";
-		char sk = '-';
-			//if(!sk.equals(s.charAt(1))||!sk.equals(s.charAt(5))||!sk.equals(s.charAt(11))) {
-		      if(sk!=s.charAt(1)||sk!=s.charAt(5)||sk!=s.charAt(11)) {
-				System.out.println("wrong input");
-			}else {
-				int k = (Integer.parseInt(s.charAt(0))*1+Integer.parseInt(s.charAt(2))*2+Integer.parseInt(s.charAt(3))*3+Integer.parseInt(s.charAt(4))*4+Integer.parseInt(s.charAt(6))*5+Integer.parseInt(s.charAt(7))*6+Integer.parseInt(s.charAt(8))*7+Integer.parseInt(s.charAt(9))*8+Integer.parseInt(s.charAt(10))*9+Integer.parseInt(s.charAt(12))*10) %11;
-				if(k==s.charAt(12)) {
-					System.out.println("Right");	
-				}else {
-					for(int j=0;j<12;j++) {
-						System.out.print(s.charAt(j));
-					}
-					System.out.println(k);
-				}
-			}	
+		int sum = 0;
+		char sk = '0';
+		String ss=s.replace("-", "");
+		for(int i=0; i<9; i++) {  //这里是9不是10，不要搞错了
+			int num = (int)ss.charAt(i)-48;
+			sum+=num*(i+1);	
+		}
+		sum=sum%11;
+		if(sum==10) {//这里的判断语句是对识别码为“x”时作的处理
+			sk='x';
+		}else {
+			sk=(char)(sum+48);
+		}
+		if(sum==(int)ss.charAt(9)-48) {
+			System.out.println("Right");
+		}else {
+			System.out.println(s.substring(0,12)+sk);
 		}
 	}
+}
